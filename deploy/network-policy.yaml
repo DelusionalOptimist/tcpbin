@@ -1,0 +1,38 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: network-test
+  namespace: sockets-test
+spec:
+  severity: 1
+  selector:
+    matchLabels:
+      app: busybox
+        #file:
+        #  matchPaths:
+        #  - path: /home/secret.txt
+        #    readOnly: true
+  network:
+    matchProtocols:
+      - protocol: raw
+        action: Block
+      #- protocol: udp
+      #  action: Audit
+      #- protocol: tcp
+      #  action: Audit
+    #  #fromSource:
+    #  #- path: /bin/ping
+    #    #- protocol: tcp
+    #    #  fromSource:
+    #    #  - path: /bin/curl
+    #    #  - path: /bin/nc
+    #    #- protocol: udp
+    #    #  fromSource:
+    #    #  - path: /bin/curl
+    #    #  - path: /bin/nc
+    #capabilities:
+    #  matchCapabilities:
+    #  - capability: net_raw
+    #    #fromSource:
+    #    #- path: /bin/curl
+    #action: Block
